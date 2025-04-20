@@ -1,0 +1,30 @@
+{
+  "name": "fiap-hackathon-backend-api",
+  "version": "1.0.0",
+  "description": "Api desenvolvida para o hackathon da fase final do curso de pós graduação em desenvolvimento full stack na FIAP.",
+  "homepage": "https://github.com/HeloiseSantos/fiap-hackathon-backend-api#readme",
+  "bugs": {
+    "url": "https://github.com/HeloiseSantos/fiap-hackathon-backend-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HeloiseSantos/fiap-hackathon-backend-api.git"
+  },
+  "license": "ISC",
+  "author": "Heloíse Silva Santos e Jonas de Andrade Zuazo Moreira",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-validator": "^7.2.1",
+    "mongoose": "^8.13.2",
+    "nodemon": "^3.1.9"
+  }
+}
