@@ -1,17 +1,17 @@
 const { validationResult } = require("express-validator");
-const Aluno = require("../models/aluno");
+const Student = require("../models/student");
 
-exports.getAlunos = async (req, res) => {
+exports.getStudents = async (req, res) => {
     try {
-        const alunos = await Aluno.find();
-        return res.status(200).json(alunos);
+        const students = await Student.find();
+        return res.status(200).json(students);
     } catch (error) {
         console.error(error);
         return res.status(500).json(error);
     }
 };
 
-exports.searchAlunos = async (req, res) => {
+exports.searchStudents = async (req, res) => {
     try {
         const searchString = req.query.q;
 
@@ -22,35 +22,35 @@ exports.searchAlunos = async (req, res) => {
         // Regex to case insensitive
         const regex = new RegExp(searchString, "i");
 
-        const alunos = await Aluno.find({
-            $or: [{ title: regex }, { description: regex }],
+        const students = await Student.find({
+            $or: [{ name: regex }],
         });
 
-        return res.status(200).json(alunos);
+        return res.status(200).json(students);
     } catch (error) {
         console.error(error);
         return res.status(500).json(error);
     }
 };
 
-exports.getAlunoById = async (req, res) => {
+exports.getStudentById = async (req, res) => {
     try {
-        const aluno = await Aluno.findById(req.params.id);
+        const student = await Student.findById(req.params.id);
 
-        if (!aluno) {
+        if (!student) {
             return res
                 .status(404)
-                .json({ message: "There is no aluno with the requested id." });
+                .json({ message: "There is no student with the requested id." });
         }
 
-        return res.status(200).json(aluno);
+        return res.status(200).json(student);
     } catch (error) {
         console.error(error);
         return res.status(500).json(error);
     }
 };
 
-exports.createAluno = async (req, res) => {
+exports.createStudent = async (req, res) => {
     try {
         const result = validationResult(req);
 
@@ -58,7 +58,7 @@ exports.createAluno = async (req, res) => {
             return res.status(400).json({ errors: result.array() });
         }
 
-        const aluno = new Aluno({
+        const student = new Student({
             name: req.body.name,
             age: req.body.age,
             grade: req.body.grade,
@@ -66,16 +66,16 @@ exports.createAluno = async (req, res) => {
             updateDate: req.body.updateDate,
         });
 
-        const savedAluno = await aluno.save();
+        const savedStudent = await student.save();
 
-        return res.status(201).json(savedAluno);
+        return res.status(201).json(savedStudent);
     } catch (error) {
         console.error(error);
         return res.status(500).json(error);
     }
 };
 
-exports.updateAluno = async (req, res) => {
+exports.updateStudent = async (req, res) => {
     try {
         const result = validationResult(req);
 
@@ -83,7 +83,7 @@ exports.updateAluno = async (req, res) => {
             return res.status(400).json({ errors: result.array() });
         }
 
-        const aluno = await Aluno.findByIdAndUpdate(
+        const student = await Student.findByIdAndUpdate(
             req.params.id,
             {
                 name: req.body.name,
@@ -97,27 +97,27 @@ exports.updateAluno = async (req, res) => {
             }
         );
 
-        if (!aluno) {
+        if (!student) {
             return res
                 .status(404)
-                .json({ message: "There is no aluno with the requested id." });
+                .json({ message: "There is no student with the requested id." });
         }
 
-        return res.status(200).json(aluno);
+        return res.status(200).json(student);
     } catch (error) {
         console.error(error);
         return res.status(500).json(error);
     }
 };
 
-exports.deleteAluno = async (req, res) => {
+exports.deleteStudent = async (req, res) => {
     try {
-        const aluno = await Aluno.findByIdAndDelete(req.params.id);
+        const student = await Student.findByIdAndDelete(req.params.id);
 
-        if (!aluno) {
+        if (!student) {
             return res
                 .status(404)
-                .json({ message: "There is no aluno with the requested id." });
+                .json({ message: "There is no student with the requested id." });
         }
 
         return res.status(204).json();

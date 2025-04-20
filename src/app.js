@@ -13,7 +13,7 @@ app.use(
 
 app.use(express.json());
 
-const alunosRoutes = require("../routes/alunosRoutes");
-app.use("/alunos", alunosRoutes);
+const studentsRoutes = require("../routes/studentsRoutes");
+app.use("/students", studentsRoutes);
 
 module.exports = app;

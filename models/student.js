@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Aluno = mongoose.model('Aluno', { 
+const Student = mongoose.model('Student', { 
     name: String,
     age: Number,
     grade: Number,
@@ -8,4 +8,4 @@ const Aluno = mongoose.model('Aluno', {
     updateDate: String
 });
 
-module.exports = Aluno;
+module.exports = Student;
