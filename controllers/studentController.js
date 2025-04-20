@@ -23,7 +23,7 @@ exports.searchStudents = async (req, res) => {
         const regex = new RegExp(searchString, "i");
 
         const students = await Student.find({
-            $or: [{ name: regex }],
+            $or: [{ name: regex }, { interests: regex }],
         });
 
         return res.status(200).json(students);
@@ -62,6 +62,7 @@ exports.createStudent = async (req, res) => {
             name: req.body.name,
             age: req.body.age,
             grade: req.body.grade,
+            interests: req.body.interests,
             createDate: req.body.createDate,
             updateDate: req.body.updateDate,
         });
@@ -89,6 +90,7 @@ exports.updateStudent = async (req, res) => {
                 name: req.body.name,
                 age: req.body.age,
                 grade: req.body.grade,
+                interests: req.body.interests,
                 createDate: req.body.createDate,
                 updateDate: req.body.updateDate,
             },
